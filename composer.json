@@ -1,0 +1,24 @@
+{
+    "name": "rapidez/magento2-compadre",
+    "description": "Some Magento code to improve the Rapidez experience",
+    "keywords": [
+        "rapidez"
+    ],
+    "homepage": "https://rapidez.io",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.0.2|^8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rapidez\\Compadre\\": "src"
+        },
+        "files": [
+            "src/registration.php"
+        ]
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

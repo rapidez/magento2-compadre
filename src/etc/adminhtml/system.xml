@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="rapidez" translate="label" sortOrder="999">
+            <label>Rapidez</label>
+        </tab>
+        <section id="rapidez" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+            <label>Config</label>
+            <tab>rapidez</tab>
+            <resource>Rapidez_Compadre::config_Rapidez_Compadre</resource>
+            <group id="graphql" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                <label>Graphql</label>
+                <field id="expose" type="multiselect" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>Expose</label>
+                    <comment>The fields will still be visible, and you can try to request them. However they will always be null</comment>
+                    <source_model>Rapidez\Compadre\Model\Config\Source\Fields</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

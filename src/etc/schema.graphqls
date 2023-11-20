@@ -1,0 +1,11 @@
+interface ProductInterface {
+    stock_item: ProductStockItem @resolver(class: "Rapidez\\Compadre\\Model\\Resolver\\Inventory\\StockItem")
+}
+
+type ProductStockItem {
+    in_stock: Boolean @doc(description: "Status wether the product is in stock")
+    qty: Float @doc(description: "Quantity that is available in stock")
+    min_sale_qty: Int @doc(description: "Minimal quantity that is allowed to be ordered at once")
+    max_sale_qty: Int @doc(description: "Maximum quantity that is allowed to be ordered at once")
+    qty_increments: Int @doc(description: "Quantity increments in which you can buy the item")
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <rapidez>
+            <graphql>
+                <expose>min_sale_qty,max_sale_qty,qty_increments</expose>
+            </graphql>
+        </rapidez>
+    </default>
+</config>
