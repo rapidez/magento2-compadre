@@ -1,6 +1,6 @@
 # Magento Rapidez Compadre
 
-This **Magento Module** will allow Rapidez to support more functionalit.
+This **Magento Module** will allow Rapidez to support more functionalities.
 
 ## Current functionality
 
@@ -19,7 +19,7 @@ bin/magento module:enable Rapidez_Compadre
 
 Configuration options are available under `Stores > Configuration > Rapidez > Config`
 
-Here you can configure what extra fields should be exposed in GraphQL, fields not exposed will be null.
+Here you can configure what extra fields should be exposed in GraphQL, fields not exposed will be `null`.
 
 ## Release instructions
 
