@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Quote\Model\Cart\BuyRequest\CustomizableOptionDataProvider">
+        <plugin name="enable-file-uploads" type="Rapidez\Compadre\Model\Plugin\CustomizableOptionDataProviderUploads" sortOrder="10"/>
+    </type>
+    <type name="Magento\QuoteGraphQl\Model\CartItem\DataProvider\CustomizableOptionValue\Composite">
+        <arguments>
+            <argument name="customizableOptionValues" xsi:type="array">
+                <item name="file" xsi:type="string">Rapidez\Compadre\Model\CartItem\DataProvider\CustomizableOptionValue\File</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
