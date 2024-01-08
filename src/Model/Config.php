@@ -30,7 +30,7 @@ class Config
 
     public function getExposedGraphQlFields(): ?array
     {
-        return $exposedGraphQlFields ??= explode(',', $this->getGraphQlConfig('expose'));
+        return $this->exposedGraphQlFields ??= explode(',', $this->getGraphQlConfig('expose') ?? '');
     }
 
     public function isFieldExposed($field): bool
