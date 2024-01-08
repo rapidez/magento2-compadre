@@ -21,7 +21,7 @@ class CustomizableOptionDataProviderUploads {
     }
 
     public function processFileUpload($value) {
-        if (!($decodedValue = @json_decode($value, true))) {
+        if (!is_array($decodedValue = @json_decode($value, true))) {
             return $value;
         }
 
