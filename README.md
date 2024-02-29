@@ -7,6 +7,8 @@ This **Magento Module** will allow Rapidez to support more functionalities.
 Currently this module adds the ProductStockItem type to the ProductInterface in the graphql definition.
 Allowing you to retrieve the in_stock, qty, min_sale_qty, max_sale_qty, qty_increments
 
+And it extends Magento functionality in order to facilitate file upload product options via GraphQL
+
 ## Installation
 
 In your Magento installation run
