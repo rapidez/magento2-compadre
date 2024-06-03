@@ -9,6 +9,7 @@ use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magento\Quote\Model\Quote\Item;
+use Magento\Quote\Model\Quote\Item\Option;
 use Magento\Catalog\Api\Data\ProductInterface;
 
 class Backorder implements ResolverInterface
@@ -28,15 +29,22 @@ class Backorder implements ResolverInterface
         $cartItem = $value['model'];
 
         // If used, grab the first configuration of a configurable item and use that
-        $configurableItems = $cartItem['qty_options'] ?? [];
-        if ($configurableItems) {
-            return reset($configurableItems)['backorders'] ?? 0;
+        $configuredItems = $cartItem['qty_options'] ?? [];
+        if ($configuredItems) {
+
+            /** @var Option $item */
+            $item = reset($configuredItems);
+            $backorderStatus = $item?->getProduct()?->getExtensionAttributes()?->getStockItem()?->getBackorders() ?? 0;
+            if ($backorderStatus != 2) {
+                return 0;
+            }
+            return $item['backorders'] ?? 0;
         }
 
         /** @var ProductInterface $product */
         $product = $this->productRepositoryInterface->get($cartItem->getSku());
         $stockItem = $product->getExtensionAttributes()->getStockItem();
-        if (!$stockItem) {
+        if (!$stockItem || $stockItem->getBackorders() != 2) {
             return 0;
         }
 
