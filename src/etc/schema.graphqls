@@ -9,3 +9,7 @@ type ProductStockItem {
     max_sale_qty: Int @doc(description: "Maximum quantity that is allowed to be ordered at once")
     qty_increments: Int @doc(description: "Quantity increments in which you can buy the item")
 }
+
+interface CartItemInterface {
+    qty_backordered: Int @resolver(class: "Rapidez\\Compadre\\Model\\Resolver\\Quote\\Backorder") @doc(description: "Amount of items that are backordered")
+}
