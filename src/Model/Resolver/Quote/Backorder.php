@@ -31,7 +31,6 @@ class Backorder implements ResolverInterface
         // If used, grab the first configuration of a configurable item and use that
         $configuredItems = $cartItem['qty_options'] ?? [];
         if ($configuredItems) {
-
             /** @var Option $item */
             $item = reset($configuredItems);
             $backorderStatus = $item?->getProduct()?->getExtensionAttributes()?->getStockItem()?->getBackorders() ?? 0;
