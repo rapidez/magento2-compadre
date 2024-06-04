@@ -15,7 +15,8 @@ use Magento\Catalog\Api\Data\ProductInterface;
 class Backorder implements ResolverInterface
 {
     public function __construct(
-        private ProductRepositoryInterface $productRepositoryInterface
+        private ProductRepositoryInterface $productRepositoryInterface,
+        protected Config $config
     ) {
     }
 
@@ -23,6 +24,10 @@ class Backorder implements ResolverInterface
     {
         if (!isset($value['model'])) {
             throw new LocalizedException(__('"model" value should be specified'));
+        }
+
+        if (!$this->config->isFieldExposed('qty_backordered')) {
+            return null;
         }
 
         /** @var Item $cartItem */
