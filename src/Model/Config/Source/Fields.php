@@ -32,7 +32,7 @@ class Fields implements ArrayInterface
             ['value' => 'min_sale_qty', 'label' => __('stock_item -> min_sale_qty')],
             ['value' => 'max_sale_qty', 'label' => __('stock_item -> max_sale_qty')],
             ['value' => 'qty_increments', 'label' => __('stock_item -> qty_increments')],
-            ['value' => 'qty_backordered', 'label' => __('stock_item -> qty_backordered')],
+            ['value' => 'qty_backordered', 'label' => __('cart_item -> qty_backordered')],
         ];
     }
 }
