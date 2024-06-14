@@ -11,6 +11,7 @@ use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magento\Quote\Model\Quote\Item;
 use Magento\Quote\Model\Quote\Item\Option;
 use Magento\Catalog\Api\Data\ProductInterface;
+use Rapidez\Compadre\Model\Config;
 
 class Backorder implements ResolverInterface
 {
