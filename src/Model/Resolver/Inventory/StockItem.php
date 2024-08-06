@@ -30,6 +30,7 @@ class StockItem implements ResolverInterface {
 
         /** @var ProductInterface $product */
         $product = $value['model'];
+
         /** @var array $stockItem */
         $stockItem = $this->resolveStockItem->resolve($product);
 
@@ -42,6 +43,10 @@ class StockItem implements ResolverInterface {
             $stockItem['in_stock'] = $msiStock->getStatus();
         }
 
-        return $stockItem;
+        return array_filter(
+            $stockItem,
+            fn ($key) => $this->config->isFieldExposed($key),
+            ARRAY_FILTER_USE_KEY
+        );
     }
 }

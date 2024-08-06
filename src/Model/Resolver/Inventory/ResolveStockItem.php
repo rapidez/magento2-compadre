@@ -25,21 +25,12 @@ class ResolveStockItem
         /** @var StockItemInterface $stockItem */
         $stockItem = $stockStatus->getStockItem();
 
-        return $this->getResolvedFields($stockItem);
-    }
-
-    public function getResolvedFields(StockItemInterface $stockItem): array
-    {
-        return array_filter(
-            [
-                'in_stock'          => $stockItem->getIsInStock(),
-                'qty'               => $stockItem->getQty(),
-                'min_sale_qty'      => $stockItem->getMinSaleQty(),
-                'max_sale_qty'      => $stockItem->getMaxSaleQty(),
-                'qty_increments'    => $stockItem->getQtyIncrements() === false ? 1 : $stockItem->getQtyIncrements()
-            ],
-            fn ($key) => $this->config->isFieldExposed($key),
-            ARRAY_FILTER_USE_KEY
-        );
+        return [
+            'in_stock' => $stockItem->getIsInStock(),
+            'qty' => $stockItem->getQty(),
+            'min_sale_qty' => $stockItem->getMinSaleQty(),
+            'max_sale_qty' => $stockItem->getMaxSaleQty(),
+            'qty_increments' => $stockItem->getQtyIncrements() === false ? 1 : $stockItem->getQtyIncrements()
+        ];
     }
 }
