@@ -8,14 +8,12 @@ use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\CatalogInventory\Api\Data\StockItemInterface;
 use Magento\CatalogInventory\Api\Data\StockStatusInterface;
 use Magento\CatalogInventory\Api\StockStatusRepositoryInterface;
-use Rapidez\Compadre\Model\Config;
 
 class ResolveStockItem
 {
 
     public function __construct(
-        private StockStatusRepositoryInterface $stockStatusRepository,
-        protected Config $config
+        private StockStatusRepositoryInterface $stockStatusRepository
     ) {}
 
     public function resolve(ProductInterface $product)

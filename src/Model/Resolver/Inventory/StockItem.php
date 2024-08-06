@@ -12,15 +12,13 @@ use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magento\Framework\ObjectManagerInterface;
 use Rapidez\Compadre\Model\Config;
 
-class StockItem implements ResolverInterface {
-
+class StockItem implements ResolverInterface
+{
     public function __construct(
         protected ResolveStockItem $resolveStockItem,
         protected ObjectManagerInterface $objectManager,
         protected Config $config
-    )
-    {
-    }
+    ) {}
 
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {

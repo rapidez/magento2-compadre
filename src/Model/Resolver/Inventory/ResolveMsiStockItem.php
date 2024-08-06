@@ -7,7 +7,6 @@ use Magento\InventoryApi\Api\Data\SourceItemInterface;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\InventoryApi\Api\SourceItemRepositoryInterface;
 use Magento\InventorySales\Model\ResourceModel\GetAssignedStockIdForWebsite;
-use Rapidez\Compadre\Model\Config;
 use Rapidez\Compadre\Model\ResourceModel\GetAssignedStockCodeForWebsite;
 
 class ResolveMsiStockItem
@@ -16,11 +15,8 @@ class ResolveMsiStockItem
         private GetAssignedStockIdForWebsite $getAssignedStockIdForWebsite,
         private SearchCriteriaBuilder $searchCriteriaBuilder,
         private SourceItemRepositoryInterface $sourceItemRepository,
-        private GetAssignedStockCodeForWebsite $getAssignedStockCodeForWebsite,
-        protected Config $config
-    )
-    {
-    }
+        private GetAssignedStockCodeForWebsite $getAssignedStockCodeForWebsite
+    ) {}
 
     public function resolve(ProductInterface $product, string $storeCode)
     {
