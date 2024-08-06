@@ -21,6 +21,7 @@ class ResolveMsiStockItem
     )
     {
     }
+    
     public function resolve(ProductInterface $product, string $storeCode)
     {
 
