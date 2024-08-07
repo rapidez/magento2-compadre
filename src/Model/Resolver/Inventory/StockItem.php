@@ -5,23 +5,20 @@ declare(strict_types=1);
 namespace Rapidez\Compadre\Model\Resolver\Inventory;
 
 use Magento\Catalog\Api\Data\ProductInterface;
-use Magento\CatalogInventory\Api\Data\StockItemInterface;
-use Magento\CatalogInventory\Api\Data\StockStatusInterface;
-use Magento\CatalogInventory\Api\StockStatusRepositoryInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
+use Magento\Framework\ObjectManagerInterface;
 use Rapidez\Compadre\Model\Config;
 
-class StockItem implements ResolverInterface {
-
+class StockItem implements ResolverInterface
+{
     public function __construct(
-        private StockStatusRepositoryInterface $stockStatusRepository,
+        protected ResolveStockItem $resolveStockItem,
+        protected ObjectManagerInterface $objectManager,
         protected Config $config
-    )
-    {
-    }
+    ) {}
 
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
@@ -31,24 +28,21 @@ class StockItem implements ResolverInterface {
 
         /** @var ProductInterface $product */
         $product = $value['model'];
-        /** @var StockStatusInterface $stockStatus */
-        $stockStatus = $this->stockStatusRepository->get($product->getId());
-        /** @var StockItemInterface $stockItem */
-        $stockItem = $stockStatus->getStockItem();
 
-        return $this->getResolvedFields($stockItem);
-    }
+        /** @var array $stockItem */
+        $stockItem = $this->resolveStockItem->resolve($product);
 
-    public function getResolvedFields(StockItemInterface $stockItem): array
-    {
+        if (interface_exists('Magento\InventoryApi\Api\SourceItemRepositoryInterface')) {
+            $storeCode = $context->getExtensionAttributes()->getStore()->getCode();
+            $resolve = $this->objectManager->get('Rapidez\Compadre\Model\Resolver\Inventory\ResolveMsiStockItem');
+            $msiStock = $resolve->resolve($product, $storeCode);
+
+            $stockItem['qty'] = $msiStock->getQuantity();
+            $stockItem['in_stock'] = $msiStock->getStatus();
+        }
+
         return array_filter(
-            [
-                'in_stock'          => $stockItem->getIsInStock(),
-                'qty'               => $stockItem->getQty(),
-                'min_sale_qty'      => $stockItem->getMinSaleQty(),
-                'max_sale_qty'      => $stockItem->getMaxSaleQty(),
-                'qty_increments'    => $stockItem->getQtyIncrements() === false ? 1 : $stockItem->getQtyIncrements()
-            ],
+            $stockItem,
             fn ($key) => $this->config->isFieldExposed($key),
             ARRAY_FILTER_USE_KEY
         );
