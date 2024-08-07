@@ -20,7 +20,6 @@ class ResolveMsiStockItem
 
     public function resolve(ProductInterface $product, string $storeCode)
     {
-
         $scopeId = $this->getAssignedStockIdForWebsite->execute($storeCode);
 
         $sourceCode = $this->getAssignedStockCodeForWebsite->execute($scopeId);
