@@ -33,9 +33,9 @@ class StockItem implements ResolverInterface
         $stockItem = $this->resolveStockItem->resolve($product);
 
         if (interface_exists('Magento\InventoryApi\Api\SourceItemRepositoryInterface')) {
-            $websiteCode = $context->getExtensionAttributes()->getStore()->getWebsite()->getCode();
+            $storeCode = $context->getExtensionAttributes()->getStore()->getCode();
             $resolve = $this->objectManager->get('Rapidez\Compadre\Model\Resolver\Inventory\ResolveMsiStockItem');
-            $msiStock = $resolve->resolve($product, $websiteCode);
+            $msiStock = $resolve->resolve($product, $storeCode);
 
             $stockItem['qty'] = $msiStock->getQuantity();
             $stockItem['in_stock'] = $msiStock->getStatus();
