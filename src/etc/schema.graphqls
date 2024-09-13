@@ -12,4 +12,5 @@ type ProductStockItem {
 
 interface CartItemInterface {
     qty_backordered: Int @resolver(class: "Rapidez\\Compadre\\Model\\Resolver\\Quote\\Backorder") @doc(description: "Amount of items that are backordered")
+    sales_rule_labels: [String] @resolver(class: "Rapidez\\Compadre\\Model\\Resolver\\Quote\\Data\\SalesRuleLabel") @doc(descipriont: "Labels of the sales rules")
 }
