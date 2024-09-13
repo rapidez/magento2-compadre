@@ -8,6 +8,7 @@ use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\SalesRule\Api\RuleRepositoryInterface;
 use Magento\SalesRule\Api\Data\RuleInterface;
 use Magento\Quote\Model\Quote\Item;
+use Magento\GraphQl\Model\Query\Context;
 
 class SalesRuleLabel implements ResolverInterface
 {
@@ -23,11 +24,29 @@ class SalesRuleLabel implements ResolverInterface
 
         $labels = [];
 
-        foreach (explode(',', (string) $cartItem->getAppliedRuleIds()) as $ruleId) {
+        foreach (explode(',', (string) $cartItem->getAppliedRuleIds()) as $key=>$ruleId) {
             /** @var RuleInterface $rule */
             $rule = $this->ruleRepository->getById((int) $ruleId);
+            
+            // @phpstan-ignore-next-line
+            $store = $context->getExtensionAttributes()->getStore();
+            $storeId = $store->getId();
 
-            $labels[] = $rule->getName();
+            foreach($rule->getStoreLabels() as $storeLabel) {
+                if ((int) $storeLabel->getStoreId() === (int) $storeId) {
+                    $storeLabel = $storeLabel->getStoreLabel();
+                    break;
+                }
+            }
+            
+            $labels[] = [
+                'name' => $rule->getName(),
+                'description' => $rule->getDescription(),
+                'discount_amount' => $rule->getDiscountAmount(),
+                'from_date' => $rule->getFromDate(),
+                'to_date' => $rule->getToDate(),
+                'store_label' => $storeLabel ?? null,
+            ];
         }
 
         return $labels;

@@ -12,6 +12,7 @@
         "magento/framework": "*",
         "magento/module-sales-rule": "*",
         "magento/module-catalog": "*",
+        "magento/module-graph-ql": "*",
         "magento/module-quote-graph-ql": "*"
     },
     "require-dev": {
