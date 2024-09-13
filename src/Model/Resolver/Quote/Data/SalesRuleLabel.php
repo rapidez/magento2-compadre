@@ -16,7 +16,7 @@ class SalesRuleLabel implements ResolverInterface
     )
     {}
 
-    public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null): array
+    public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         /** @var Item */
         $cartItem = $value['model'];
