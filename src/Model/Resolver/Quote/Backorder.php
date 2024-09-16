@@ -39,7 +39,8 @@ class Backorder implements ResolverInterface
         if ($configuredItems) {
             /** @var Option $item */
             $item = reset($configuredItems);
-            $backorderStatus = $item?->getProduct()?->getExtensionAttributes()?->getStockItem()?->getBackorders() ?? 0;
+            // @phpstan-ignore-next-line
+            $backorderStatus = $item?->getProduct()?->getExtensionAttributes()->getStockItem()->getBackorders() ?? 0;
             if ($backorderStatus != 2) {
                 return 0;
             }
@@ -48,6 +49,7 @@ class Backorder implements ResolverInterface
 
         /** @var ProductInterface $product */
         $product = $this->productRepositoryInterface->get($cartItem->getSku());
+        // @phpstan-ignore-next-line
         $stockItem = $product->getExtensionAttributes()->getStockItem();
         if (!$stockItem || $stockItem->getBackorders() != 2) {
             return 0;

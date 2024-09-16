@@ -32,7 +32,7 @@ class StockItem implements ResolverInterface {
         /** @var ProductInterface $product */
         $product = $value['model'];
         /** @var StockStatusInterface $stockStatus */
-        $stockStatus = $this->stockStatusRepository->get($product->getId());
+        $stockStatus = $this->stockStatusRepository->get((string) $product->getId());
         /** @var StockItemInterface $stockItem */
         $stockItem = $stockStatus->getStockItem();
 

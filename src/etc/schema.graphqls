@@ -10,6 +10,16 @@ type ProductStockItem {
     qty_increments: Int @doc(description: "Quantity increments in which you can buy the item")
 }
 
+type SalesRuleLabel {
+    name: String @doc(description: "Name of the label")
+    description: String @doc(description: "Description of the label")
+    store_label: String @doc(description: "Label of the current store")
+    discount_amount: Float @doc(description: "Amount of discount")
+    from_date: String @doc(description: "Date the sales rule becomes active")
+    to_date: String @doc(description: "Date the sales rule stops being active")
+}
+
 interface CartItemInterface {
     qty_backordered: Int @resolver(class: "Rapidez\\Compadre\\Model\\Resolver\\Quote\\Backorder") @doc(description: "Amount of items that are backordered")
+    sales_rule_labels: [SalesRuleLabel] @resolver(class: "Rapidez\\Compadre\\Model\\Resolver\\Quote\\Data\\SalesRuleLabel") @doc(descipriont: "Labels of the sales rules")
 }
