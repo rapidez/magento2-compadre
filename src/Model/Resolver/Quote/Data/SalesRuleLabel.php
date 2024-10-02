@@ -9,6 +9,7 @@ use Magento\SalesRule\Api\RuleRepositoryInterface;
 use Magento\SalesRule\Api\Data\RuleInterface;
 use Magento\Quote\Model\Quote\Item;
 use Magento\GraphQl\Model\Query\Context;
+use Magento\Framework\Exception\NoSuchEntityException;
 
 class SalesRuleLabel implements ResolverInterface
 {
@@ -25,8 +26,12 @@ class SalesRuleLabel implements ResolverInterface
         $labels = [];
 
         foreach (explode(',', (string) $cartItem->getAppliedRuleIds()) as $key=>$ruleId) {
-            /** @var RuleInterface $rule */
-            $rule = $this->ruleRepository->getById((int) $ruleId);
+            try {
+                /** @var RuleInterface $rule */
+                $rule = $this->ruleRepository->getById((int) $ruleId);
+            } catch (NoSuchEntityException) {
+                continue;
+            }
             
             // @phpstan-ignore-next-line
             $store = $context->getExtensionAttributes()->getStore();
