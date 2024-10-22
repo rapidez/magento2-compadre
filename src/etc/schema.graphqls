@@ -1,5 +1,6 @@
 interface ProductInterface {
     stock_item: ProductStockItem @resolver(class: "Rapidez\\Compadre\\Model\\Resolver\\Inventory\\StockItem")
+    visibility: Int @doc(description: "Visibility of the product")
 }
 
 type ProductStockItem {
