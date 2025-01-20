@@ -55,7 +55,12 @@ class Backorder implements ResolverInterface
             return 0;
         }
 
-        $difference = $cartItem->getQty() - $stockItem->getQty();
+        $stockQty = $stockItem->getQty();
+        if ($stockQty < 0) {
+            $stockQty = 0;
+        }
+
+        $difference = $cartItem->getQty() - $stockQty;
         if ($difference <= 0) {
             return 0;
         }
