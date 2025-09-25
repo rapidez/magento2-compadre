@@ -11,4 +11,7 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\LoginAsCustomerAdminUi\Controller\Adminhtml\Login\Login">
+        <plugin name="override-login-as-customer" type="Rapidez\Compadre\Plugin\LoginAsCustomerAdminUi\Controller\Adminhtml\Login\LoginPlugin" sortOrder="10"/>
+    </type>
 </config>

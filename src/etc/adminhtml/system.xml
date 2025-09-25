@@ -8,12 +8,27 @@
             <label>Config</label>
             <tab>rapidez</tab>
             <resource>Rapidez_Compadre::config_Rapidez_Compadre</resource>
+            <group id="general" sortOrder="5" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                <label>General</label>
+                <field id="rapidez_url" type="text" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>Rapidez Url</label>
+                    <comment>The base Rapidez url of your site e.g https://example.com, if left empty the base url of the store view will be used.</comment>
+                </field>
+            </group>
             <group id="graphql" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
                 <label>Graphql</label>
                 <field id="expose" type="multiselect" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
                     <label>Expose</label>
                     <comment>The fields will still be visible, and you can try to request them. However they will always be null</comment>
                     <source_model>Rapidez\Compadre\Model\Config\Source\Fields</source_model>
+                </field>
+            </group>
+            <group id="login_as_customer" sortOrder="15" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                <label>Login As Customer</label>
+                <field id="override" canRestore="1" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Override login as customer to Rapidez</label>
+                    <comment>Should we override the admin "Login As Customer" button to redirect to the Rapidez shop? (make sure rapidez/login-as-customer is installed)</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
             </group>
         </section>
