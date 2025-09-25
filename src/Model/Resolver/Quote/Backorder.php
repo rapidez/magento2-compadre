@@ -34,6 +34,11 @@ class Backorder implements ResolverInterface
         /** @var Item $cartItem */
         $cartItem = $value['model'];
 
+        if ($cartItem->getSku() === null) 
+        {
+            return null;
+        }
+
         // If used, grab the first configuration of a configurable item and use that
         $configuredItems = $cartItem['qty_options'] ?? [];
         if ($configuredItems) {
@@ -49,8 +54,8 @@ class Backorder implements ResolverInterface
 
         /** @var ProductInterface $product */
         $product = $this->productRepositoryInterface->get($cartItem->getSku());
-        // @phpstan-ignore-next-line
-        $stockItem = $product->getExtensionAttributes()->getStockItem();
+
+        $stockItem = $product->getExtensionAttributes()?->getStockItem();
         if (!$stockItem || $stockItem->getBackorders() != 2) {
             return 0;
         }

@@ -15,12 +15,14 @@
         "magento/module-graph-ql": "*",
         "magento/module-quote-graph-ql": "*",
         "magento/module-login-as-customer-admin-ui": "*",
+        "magento/module-login-as-customer-api": "*",
         "magento/module-store": "*",
+        "magento/module-integration": "*",
         "guzzlehttp/guzzle": "*"
     },
     "require-dev": {
-        "bitexpert/phpstan-magento": "^0.11.0",
-        "phpstan/phpstan": "^1.10"
+        "bitexpert/phpstan-magento": "^0.42.0",
+        "phpstan/phpstan": "^2.0"
     },
     "repositories": {
         "magento": {

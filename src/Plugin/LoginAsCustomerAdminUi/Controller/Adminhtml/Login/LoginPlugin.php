@@ -59,21 +59,6 @@ class LoginPlugin
      */
     private $isLoginAsCustomerEnabled;
 
-    /**
-     * @param Context $context
-     * @param Session $authSession
-     * @param StoreManagerInterface $storeManager
-     * @param CustomerRepositoryInterface $customerRepository
-     * @param ConfigInterface $config
-     * @param AuthenticationDataInterfaceFactory $authenticationDataFactory
-     * @param SaveAuthenticationDataInterface $saveAuthenticationData
-     * @param DeleteAuthenticationDataForUserInterface $deleteAuthenticationDataForUser
-     * @param Url $url
-     * @param Share|null $share
-     * @param SetLoggedAsCustomerCustomerIdInterface|null $setLoggedAsCustomerCustomerId
-     * @param IsLoginAsCustomerEnabledForCustomerInterface|null $isLoginAsCustomerEnabled
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
-     */
     public function __construct(
         protected Context $context,
         protected Session $authSession,
@@ -93,10 +78,10 @@ class LoginPlugin
         ?IsLoginAsCustomerEnabledForCustomerInterface $isLoginAsCustomerEnabled = null,
     ) {
         $this->_request = $context->getRequest();
-        $this->share = $share ?? ObjectManager::getInstance()->get(Share::class);
-        $this->setLoggedAsCustomerCustomerId = $setLoggedAsCustomerCustomerId
+        $this->share = $share ?? ObjectManager::getInstance()->get(Share::class); /** @phpstan-ignore-line */
+        $this->setLoggedAsCustomerCustomerId = $setLoggedAsCustomerCustomerId /** @phpstan-ignore-line */
             ?? ObjectManager::getInstance()->get(SetLoggedAsCustomerCustomerIdInterface::class);
-        $this->isLoginAsCustomerEnabled = $isLoginAsCustomerEnabled
+        $this->isLoginAsCustomerEnabled = $isLoginAsCustomerEnabled /** @phpstan-ignore-line */
             ?? ObjectManager::getInstance()->get(IsLoginAsCustomerEnabledForCustomerInterface::class);
     }
 
@@ -139,7 +124,7 @@ class LoginPlugin
                 return $this->prepareJsonResult($messages);
             }
         } elseif ($this->share->isGlobalScope()) {
-            $storeId = (int)$this->storeManager->getDefaultStoreView()->getId();
+            $storeId = (int)$this->storeManager->getDefaultStoreView()?->getId();
         } else {
             $storeId = (int)$customer->getStoreId();
         }
@@ -176,7 +161,7 @@ class LoginPlugin
     /**
      * Get login proceed redirect url
      *
-     * @param string $secret
+     * @param int $customerId
      * @param int $storeId
      * @return string
      * @throws NoSuchEntityException

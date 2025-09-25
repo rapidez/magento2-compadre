@@ -40,7 +40,7 @@ class File implements CustomizableOptionValueInterface
         Uid $uidEncoder = null
     ) {
         $this->priceUnitLabel = $priceUnitLabel;
-        $this->uidEncoder = $uidEncoder ?: ObjectManager::getInstance()
+        $this->uidEncoder = $uidEncoder ?: ObjectManager::getInstance() /** @phpstan-ignore-line */
             ->get(Uid::class);
     }
 
@@ -55,7 +55,7 @@ class File implements CustomizableOptionValueInterface
         /** @var TextOptionType $optionTypeRenderer */
         $optionTypeRenderer = $option->groupFactory($option->getType());
         $optionTypeRenderer->setOption($option);
-        $priceValueUnits = $this->priceUnitLabel->getData($option->getPriceType());
+        $priceValueUnits = $this->priceUnitLabel->getData((string) $option->getPriceType());
 
         $selectedOptionValueData = [
             'id' => $selectedOption->getId(),
@@ -65,7 +65,7 @@ class File implements CustomizableOptionValueInterface
             'label' => '',
             'value' => json_decode($selectedOption->getValue())->title,
             'price' => [
-                'type' => strtoupper($option->getPriceType()),
+                'type' => strtoupper((string) $option->getPriceType()),
                 'units' => $priceValueUnits,
                 'value' => $option->getPrice(),
             ],

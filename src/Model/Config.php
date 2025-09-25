@@ -17,7 +17,7 @@ class Config
         protected StoreManagerInterface $storeManager
     ) {}
 
-    public function getConfigValue($field, $storeId = null)
+    public function getConfigValue(string $field, ?int $storeId = null): mixed
     {
         return $this->scopeConfig->getValue(
             $field,
@@ -26,17 +26,17 @@ class Config
         );
     }
 
-    public function getGeneralConfig($code, $storeId = null)
+    public function getGeneralConfig(string $code, ?int $storeId = null): mixed
     {
         return $this->getConfigValue(self::XML_PATH . 'general/' . $code, $storeId);
     }
 
-    public function getGraphQlConfig($code, $storeId = null)
+    public function getGraphQlConfig(string $code, ?int $storeId = null): mixed
     {
         return $this->getConfigValue(self::XML_PATH . 'graphql/' . $code, $storeId);
     }
 
-    public function getLoginAsCustomerConfig($code, $storeId = null)
+    public function getLoginAsCustomerConfig(string $code, ?int $storeId = null): mixed
     {
         return $this->getConfigValue(self::XML_PATH . 'login_as_customer/' . $code, $storeId);
     }
@@ -46,12 +46,12 @@ class Config
         return $this->exposedGraphQlFields ??= explode(',', $this->getGraphQlConfig('expose') ?? '');
     }
 
-    public function isFieldExposed($field): bool
+    public function isFieldExposed(string $field): bool
     {
         return $this->getExposedGraphQlFields() && in_array($field, $this->getExposedGraphQlFields());
     }
 
-    public function getRapidezUrl($storeId = null): string
+    public function getRapidezUrl(?int $storeId = null): string
     {
         if (($rapidezUrl = $this->getGeneralConfig('rapidez_url', $storeId))) {
             return $rapidezUrl;

@@ -20,10 +20,14 @@ class SalesRuleLabel implements ResolverInterface
 
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
-        /** @var Item */
-        $cartItem = $value['model'];
+        /** @var ?Item $cartItem */
+        $cartItem = $value['model'] ?? null;
 
         $labels = [];
+
+        if (!$cartItem) {
+            return $labels;
+        }
 
         foreach (explode(',', (string) $cartItem->getAppliedRuleIds()) as $key=>$ruleId) {
             try {
@@ -37,7 +41,7 @@ class SalesRuleLabel implements ResolverInterface
             $store = $context->getExtensionAttributes()->getStore();
             $storeId = $store->getId();
 
-            foreach($rule->getStoreLabels() as $storeLabel) {
+            foreach($rule->getStoreLabels() ?? [] as $storeLabel) {
                 if ((int) $storeLabel->getStoreId() === (int) $storeId) {
                     $storeLabel = $storeLabel->getStoreLabel();
                     break;

@@ -2,8 +2,11 @@ includes:
     - vendor/bitexpert/phpstan-magento/extension.neon
 parameters:
     paths:
-        - .
+        - src
     excludePaths:
         - vendor
         - Test/*
-    level: 5
+    level: 8
+    ignoreErrors:
+        -
+            identifier: missingType.iterableValue

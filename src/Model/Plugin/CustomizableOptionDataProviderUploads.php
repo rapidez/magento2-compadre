@@ -13,14 +13,15 @@ class CustomizableOptionDataProviderUploads {
     {
     }
 
-    public function afterExecute($subject, $result)
+    public function afterExecute(\Magento\Quote\Model\Cart\BuyRequest\CustomizableOptionDataProvider $subject, array $result): array
     {
         $result['options'] = array_map($this->processFileUpload(...), $result['options']);
 
         return $result;
     }
 
-    public function processFileUpload($value) {
+    public function processFileUpload(mixed $value) : mixed
+    {
         if (!is_array($value) && !is_array($decodedValue = @json_decode($value, true))) {
             return $value;
         }
