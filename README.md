@@ -42,6 +42,10 @@ Allowing you to retrieve the sales rule labels that are applied to a quote item:
     }
 ```
 
+### Login as Customer
+
+When enabled and [rapidez/login-as-customer](https://github.decomv/rapidez/login-as-customer) is installed the admin "Log In As Customer" button will work with Rapidez as well.
+
 ### Other
 And it extends Magento functionality in order to facilitate file upload product options via GraphQL
 
