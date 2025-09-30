@@ -14,7 +14,7 @@ class Fields implements ArrayInterface
         ];
     }
 
-    public function toArray()
+    public function toArray() : array
     {
         $array = [];
         foreach ($this->toOptionArray() as $option) {
@@ -24,7 +24,7 @@ class Fields implements ArrayInterface
         return $array;
     }
 
-    public function getProductStockItemFields()
+    public function getProductStockItemFields() : array
     {
         return [
             ['value' => 'in_stock', 'label' => __('stock_item -> in_stock')],
