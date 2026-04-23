@@ -68,7 +68,7 @@ class LoginPlugin
         protected AuthenticationDataInterfaceFactory $authenticationDataFactory,
         protected SaveAuthenticationDataInterface $saveAuthenticationData,
         protected DeleteAuthenticationDataForUserInterface $deleteAuthenticationDataForUser,
-        protected resultFactory $resultFactory,
+        protected ResultFactory $resultFactory,
         protected Url $url,
         protected Config $rapidezConfig,
         protected TokenFactory $tokenFactory,
