@@ -5,6 +5,7 @@ namespace Rapidez\Compadre\Model\Resolver\Quote;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
@@ -52,8 +53,12 @@ class Backorder implements ResolverInterface
             return $item['backorders'] ?? 0;
         }
 
-        /** @var ProductInterface $product */
-        $product = $this->productRepositoryInterface->get($cartItem->getSku());
+        try {
+            /** @var ProductInterface $product */
+            $product = $this->productRepositoryInterface->get($cartItem->getSku());
+        } catch (NoSuchEntityException $e) {
+            return null;
+        }
 
         $stockItem = $product->getExtensionAttributes()?->getStockItem();
         if (!$stockItem || $stockItem->getBackorders() != 2) {
