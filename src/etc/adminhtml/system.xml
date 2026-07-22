@@ -31,6 +31,15 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
             </group>
+            <group id="catalog" sortOrder="20" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                <label>Catalog</label>
+                <field id="collapsed_attributes" translate="label comment" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Collapsed Attributes</label>
+                    <comment>Select the attributes for which the filters should be collapsed by default.</comment>
+                    <source_model>Rapidez\Compadre\Model\Config\Source\Attributes</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+            </group>
         </section>
     </system>
 </config>
